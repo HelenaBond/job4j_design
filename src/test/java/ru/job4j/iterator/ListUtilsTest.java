@@ -70,13 +70,13 @@ class ListUtilsTest {
     }
 
     @Test
-    void whenReplaceIfThenAllIsStay () {
+    void whenReplaceIfThenAllIsStay() {
         ListUtils.replaceIf(input, (p) -> p > 4, 4);
         assertThat(input).containsExactly(1, 3);
     }
 
     @Test
-    void whenReplaceIfThenAll4 () {
+    void whenReplaceIfThenAll4() {
         ListUtils.replaceIf(input, (p) -> p < 4, 4);
         assertThat(input).containsExactly(4, 4);
     }
