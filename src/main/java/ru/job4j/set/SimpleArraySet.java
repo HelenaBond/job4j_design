@@ -21,13 +21,12 @@ public class SimpleArraySet<T> implements SimpleSet<T> {
     @Override
     public boolean contains(T value) {
         boolean result = false;
-            Iterator<T> iterator = this.iterator();
-            while (iterator.hasNext()) {
-                if (Objects.equals(iterator.next(), value)) {
-                    result = true;
-                    break;
-                }
+        for (T t : this) {
+            if (Objects.equals(t, value)) {
+                result = true;
+                break;
             }
+        }
         return result;
     }
 
