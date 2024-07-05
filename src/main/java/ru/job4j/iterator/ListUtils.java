@@ -6,23 +6,12 @@ import java.util.function.Predicate;
 public class ListUtils {
 
     public static <T> void addBefore(List<T> list, int index, T value) {
-        Objects.checkIndex(index, list.size());
-        ListIterator<T> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            if (iterator.nextIndex() == index) {
-                iterator.add(value);
-                break;
-            }
-            iterator.next();
-        }
+        list.add(index, value);
     }
 
     public static <T> void addAfter(List<T> list, int index, T value) {
-        if (index == list.size() - 1) {
-            list.add(value);
-        } else {
-            addBefore(list, index + 1, value);
-        }
+        Objects.checkIndex(index, list.size() + 1);
+        addBefore(list, index + 1, value);
     }
 
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
@@ -32,7 +21,6 @@ public class ListUtils {
                 iterator.remove();
             }
         }
-
     }
 
     public static <T> void replaceIf(List<T> list, Predicate<T> filter, T value) {
@@ -45,8 +33,6 @@ public class ListUtils {
     }
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
-        for (T element : elements) {
-            removeIf(list, e -> e.equals(element));
-        }
+            removeIf(list, elements::contains);
     }
 }
