@@ -1,6 +1,9 @@
 package ru.job4j.map;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String name;
@@ -11,5 +14,27 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    public static void main(String[] args) {
+        Map<User, Object> map = new HashMap<>();
+        User one = new User("Ivan", 10, new GregorianCalendar(1990, 1, 1));
+        User two = new User("Ivan", 10, new GregorianCalendar(1990, 1, 1));
+        map.put(one, new Object());
+        map.put(two, new Object());
+        System.out.println(map);
+        /**
+         * 5.1 Пары попали в разные бакеты.
+         * 5.2 Проверка ключей на равенство их хеш кодов проводилась.
+         * Была использована реализация по умолчанию из класса Object
+         * (неявного родителя всех классов, в том числе и User)
+         * которая возвращает уникалный hash для каждого объекта основанный на адресе в памяти,
+         * а не на ключевых свойствах объекта.
+         * 5.3 Прооверка на equals() проводилась.
+         * Была использована реализация по умолчанию,
+         * которая сравнивает ссылки. Ссылаются ли они на один объект в памяти или на разные.
+         * Объекты были созданы с помощью оператора new, а значит у каждой ссылки свой объект.
+         * Сравнения ключевых свойств объекта не было
+         */
     }
 }
