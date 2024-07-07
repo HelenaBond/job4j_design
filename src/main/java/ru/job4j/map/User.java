@@ -1,7 +1,6 @@
 package ru.job4j.map;
 
 import java.util.*;
-import java.util.random.RandomGenerator;
 
 public class User {
     private String name;
@@ -28,7 +27,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return RandomGenerator.getDefault().hashCode();
+        return Objects.hash(name, children, birthday);
     }
 
     public static void main(String[] args) {
@@ -39,9 +38,13 @@ public class User {
         map.put(two, new Object());
         System.out.println(map);
         /**
-         * 5.1 Пары попали в разные бакеты. Потому что у ключей разные хеш-коды.
-         * 5.2 Проверка ключей на равенство их хеш кодов не проводилась. Потому что ключи попали в разные бакеты.
-         * 5.3 Прооверка на equals() не проводилась. Потому что ключи попали в разные бакеты.
+         * При бобавлении пары ключ-значене в карту высчитывается хэш ключа.
+         * По нему высчитывается бакет в котором будет хранится пара.
+         * Если бакет занят, то сначала сравниваются хэш-коды ключей.
+         * Если хэш-коды равны, то ключи сравниваются с помощью метода equals().
+         * Если метод equals() возвращает true,
+         * то это означет что ключи идентичны и старое значение которое хранилось под этим ключом
+         * будет заменено на новое.
          */
     }
 }
