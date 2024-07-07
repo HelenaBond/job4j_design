@@ -1,9 +1,7 @@
 package ru.job4j.map;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.random.RandomGenerator;
 
 public class User {
     private String name;
@@ -16,6 +14,19 @@ public class User {
         this.birthday = birthday;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return RandomGenerator.getDefault().hashCode();
+    }
+
     public static void main(String[] args) {
         Map<User, Object> map = new HashMap<>();
         User one = new User("Ivan", 10, new GregorianCalendar(1990, 1, 1));
@@ -24,7 +35,7 @@ public class User {
         map.put(two, new Object());
         System.out.println(map);
         /**
-         * 5.1 Пары попали в разные бакеты.
+         * 5.1 Пары попали в разные бакеты. Потому что у ключей разные хеш-коды.
          * 5.2 Проверка ключей на равенство их хеш кодов не проводилась. Потому что ключи попали в разные бакеты.
          * 5.3 Прооверка на equals() не проводилась. Потому что ключи попали в разные бакеты.
          */
