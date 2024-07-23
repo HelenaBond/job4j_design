@@ -26,8 +26,20 @@ public class LogFilter {
         return filtered;
     }
 
+    public void saveTo(String out) {
+        List<String> data = filter();
+        try (PrintWriter output = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(out)
+                ))) {
+            data.forEach(output::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter("data/log.txt");
-        logFilter.filter().forEach(System.out::println);
+        logFilter.saveTo("data/404.txt");
     }
 }
