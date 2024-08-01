@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 public class Search {
     public static void main(String[] args) throws IOException {
         validArgs(args);
-        Path start = Paths.get(args[0]);
-        String extension = args[1];
+        Path start = Paths.get(args[0].trim());
+        String extension = args[1].trim();
         search(start, path -> path.toFile().getName().endsWith(extension)).forEach(System.out::println);
     }
 
@@ -26,17 +26,19 @@ public class Search {
 
     public static void validArgs(String[] args) {
         if (args.length < 2) {
-            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
+            throw new IllegalArgumentException("Insufficient arguments. Usage: ROOT_FOLDER EXTENSION.");
         }
-        String start = args[0];
-        String extension = args[1];
-        if (start.isBlank() || extension.isBlank()) {
+        String start = args[0].trim();
+        String extension = args[1].trim();
+        if (start.isEmpty() || extension.isEmpty()) {
             throw new IllegalArgumentException("Arguments can not be empty.");
         }
         Path startFolder = Paths.get(start);
-        if (!Files.isDirectory(startFolder) && !Files.exists(startFolder)) {
-            throw new IllegalArgumentException(String.format("The file in directory \"%s\" not exist.", startFolder));
-
+        if (!Files.exists(startFolder)) {
+            throw new IllegalArgumentException(String.format("The path \"%s\" does not exist.", startFolder));
+        }
+        if (Files.isDirectory(startFolder)) {
+            throw new IllegalArgumentException(String.format("The path \"%s\" exists but is a directory.", startFolder));
         }
         if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("Not valid extension format. Extension must start with \".\"");

@@ -14,13 +14,14 @@ public class SearchFiles implements FileVisitor<Path> {
     private final Predicate<Path> predicate;
     private final List<Path> paths = new ArrayList<>();
 
+    public SearchFiles(Predicate<Path> predicate) {
+        this.predicate = predicate;
+    }
+
     public List<Path> getPaths() {
         return paths;
     }
 
-    public SearchFiles(Predicate<Path> predicate) {
-        this.predicate = predicate;
-    }
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
