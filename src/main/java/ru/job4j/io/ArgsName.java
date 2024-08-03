@@ -20,7 +20,7 @@ public class ArgsName {
             pair = pair.trim();
             int delimiter = pair.indexOf("=");
             validArg(pair, delimiter);
-            values.put(pair.substring(1, delimiter), pair.substring(delimiter + 1));
+            values.put(pair.substring(1, delimiter).trim(), pair.substring(delimiter + 1).trim());
         }
     }
 
