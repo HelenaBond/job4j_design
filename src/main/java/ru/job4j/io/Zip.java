@@ -35,7 +35,15 @@ public class Zip {
         }
     }
 
-    public static void validArgs(ArgsName args) {
+    public void zipAll(String[] args) throws IOException {
+        ArgsName argsName = ArgsName.of(args);
+        validArgs(argsName);
+        List<Path> sources = Search.search(Paths.get(argsName.get("d")),
+                path -> !path.toFile().getName().endsWith(argsName.get("e")));
+        packFiles(sources, Files.createFile(Paths.get(argsName.get("o"))).toFile());
+    }
+
+    private void validArgs(ArgsName args) {
         String directory = args.get("d");
         String exclude = args.get("e");
         String output = args.get("o");
@@ -72,10 +80,6 @@ public class Zip {
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        ArgsName arguments = ArgsName.of(args);
-        validArgs(arguments);
-        List<Path> sources = Search.search(Paths.get(arguments.get("d")),
-                path -> !path.toFile().getName().endsWith(arguments.get("e")));
-        zip.packFiles(sources, Files.createFile(Paths.get(arguments.get("o"))).toFile());
+        zip.zipAll(args);
     }
 }
