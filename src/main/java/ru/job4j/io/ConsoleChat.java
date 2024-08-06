@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.random.RandomGenerator;
 
 public class ConsoleChat {
     private static final String OUT = "закончить";
