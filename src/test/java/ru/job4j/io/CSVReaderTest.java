@@ -66,8 +66,8 @@ class CSVReaderTest {
     void whenFilterWithQuotes(@TempDir Path folder) throws Exception {
         String data = String.join(
                 System.lineSeparator(),
-                "name,age,\"last, name\",education",
-                "\"Tom, Tomas\",20,Smith,Bachelor",
+                "name,age,<<last, name>>,education",
+                "<<Tom, Tomas>>,20,Smith,Bachelor",
                 "Jack,25,Johnson,Undergraduate",
                 "William,30,Brown,Secondary special"
         );
@@ -81,7 +81,7 @@ class CSVReaderTest {
         String expected = String.join(
                 System.lineSeparator(),
                 "education,age,name",
-                "Bachelor,20,\"Tom, Tomas\"",
+                "Bachelor,20,<<Tom, Tomas>>",
                 "Undergraduate,25,Jack",
                 "Secondary special,30,William"
         ).concat(System.lineSeparator());

@@ -2,13 +2,14 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.*;
 
 /**
  * Класс ожидает, что если разделитель является частью значения из ячейки,
- * то такое значение заключено в двойные ковычки ".
- * Если ваше значение начинается с ковычек например "n" n; то заключите всё значение в ещё одни ковычки ""n" n";
+ * то такое значение заключено в двойной тэг << . . . >>.
+ * Не используйте двойной тэг внутри значений.
  * Если фильтрация не нужна, то в значении флага -filter укажите все поля.
  */
 public class CSVReader {
@@ -67,8 +68,8 @@ public class CSVReader {
             String current = scanner.next();
             StringBuilder builder = new StringBuilder(current);
             String temp = current.trim();
-            if (temp.startsWith("\"")) {
-                while (!temp.endsWith("\"") && scanner.hasNext()) {
+            if (temp.startsWith("<<")) {
+                while (!temp.endsWith(">>") && scanner.hasNext()) {
                     String next = scanner.next();
                     temp = next.trim();
                     builder.append(delimiter);
@@ -80,10 +81,10 @@ public class CSVReader {
         return result;
     }
 
-    public static void validArgsToReader(ArgsName argsName) throws IOException {
-        String input = argsName.get("path");
+    public static void validArgsToReader(ArgsName argsName) {
+        String input = argsName.get(PATH);
         if (input == null) {
-            throw new IllegalArgumentException("'path' argument is required.");
+            throw new IllegalArgumentException(String.format("%s argument is required.", PATH));
         }
         Path inputPath = Path.of(input);
         if (!Files.exists(inputPath)) {
@@ -93,28 +94,28 @@ public class CSVReader {
             throw new IllegalArgumentException(String.format("The path \"%s\" is a directory.", inputPath));
         }
 
-        if (argsName.get("delimiter") == null) {
-            throw new IllegalArgumentException("'delimiter' argument is required.");
+        if (argsName.get(DELIMITER) == null) {
+            throw new IllegalArgumentException(String.format("%s argument is required.", DELIMITER));
         }
 
-        String filter = argsName.get("filter");
+        String filter = argsName.get(FILTER);
         if (filter == null) {
-            throw new IllegalArgumentException("'filter' argument is required.");
+            throw new IllegalArgumentException(String.format("%s argument is required.", FILTER));
         }
         if (filter.isBlank()) {
-            throw new IllegalArgumentException("'filter' can not be empty.");
+            throw new IllegalArgumentException(String.format("%s can not be empty.", FILTER));
         }
 
-        String out = argsName.get("out");
+        String out = argsName.get(OUT);
         if (out == null) {
-            throw new IllegalArgumentException("'out' argument is required.");
+            throw new IllegalArgumentException(String.format("%s argument is required.", OUT));
         }
         if (!out.equals("stdout")) {
             try {
-                Files.createFile(Path.of(out));
-            } catch (IOException e) {
-                throw new IOException(
-                        String.format("'out' argument should be 'stdout' or valid path to this OC. %s", e.getMessage()));
+                Path.of(out);
+            } catch (InvalidPathException e) {
+                throw new InvalidPathException(
+                        String.format("%s argument should be 'stdout' or valid path to this OC. ", OUT), e.getMessage());
             }
         }
     }
