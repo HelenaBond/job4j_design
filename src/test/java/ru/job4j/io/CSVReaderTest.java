@@ -75,7 +75,7 @@ class CSVReaderTest {
         File target = folder.resolve("target.csv").toFile();
         ArgsName argsName = ArgsName.of(new String[]{
                 "-path=" + file.getAbsolutePath(), "-delimiter=,",
-                "-out=" + target.getAbsolutePath(), "-filter=education,age,name"
+                "-out=" + target.getAbsolutePath(), "-filter = education ,age, name"
         });
         Files.writeString(file.toPath(), data);
         String expected = String.join(
@@ -84,6 +84,32 @@ class CSVReaderTest {
                 "Bachelor,20,<<Tom, Tomas>>",
                 "Undergraduate,25,Jack",
                 "Secondary special,30,William"
+        ).concat(System.lineSeparator());
+        CSVReader.handle(argsName);
+        assertThat(Files.readString(target.toPath())).isEqualTo(expected);
+    }
+    @Test
+    void whenFilterWithQuotesAndEmptyValues(@TempDir Path folder) throws Exception {
+        String data = String.join(
+                System.lineSeparator(),
+                "name,age,<<last, name>>,education",
+                " ,20,Smith,Bachelor",
+                "Jack, ,Johnson,Undergraduate",
+                "William,30,Brown, "
+        );
+        File file = folder.resolve("source.csv").toFile();
+        File target = folder.resolve("target.csv").toFile();
+        ArgsName argsName = ArgsName.of(new String[]{
+                "-path=" + file.getAbsolutePath(), "-delimiter=,",
+                "-out=" + target.getAbsolutePath(), "-filter = education ,age, name"
+        });
+        Files.writeString(file.toPath(), data);
+        String expected = String.join(
+                System.lineSeparator(),
+                "education,age,name",
+                "Bachelor,20, ",
+                "Undergraduate, ,Jack",
+                " ,30,William"
         ).concat(System.lineSeparator());
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);

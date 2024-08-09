@@ -11,6 +11,7 @@ import java.util.*;
  * то такое значение заключено в двойной тэг << . . . >>.
  * Не используйте двойной тэг внутри значений.
  * Если фильтрация не нужна, то в значении флага -filter укажите все поля.
+ * Если какое либо из значений отсутствует, то на его место поставить пробел.
  */
 public class CSVReader {
 
@@ -21,9 +22,9 @@ public class CSVReader {
 
     public static void handle(ArgsName argsName) throws IOException {
         List<String> filterArgs = new LinkedList<>();
-        var scanner = new Scanner(new CharArrayReader(argsName.get(FILTER).toCharArray())).useDelimiter(",");
+        var scanner = new Scanner(new CharArrayReader(argsName.get(FILTER).toCharArray())).useDelimiter("[ *, *]");
         while (scanner.hasNext()) {
-            filterArgs.add(scanner.next().trim());
+            filterArgs.add(scanner.next());
         }
         List<String> allRows = new LinkedList<>();
         try (var reader = new Scanner(new BufferedReader(new FileReader(argsName.get(PATH))))) {
@@ -68,12 +69,14 @@ public class CSVReader {
             String current = scanner.next();
             StringBuilder builder = new StringBuilder(current);
             String temp = current.trim();
-            if (temp.startsWith("<<")) {
-                while (!temp.endsWith(">>") && scanner.hasNext()) {
-                    String next = scanner.next();
-                    temp = next.trim();
-                    builder.append(delimiter);
-                    builder.append(next);
+            if (!temp.isEmpty()) {
+                if (temp.startsWith("<<")) {
+                    while (!temp.endsWith(">>") && scanner.hasNext()) {
+                        String next = scanner.next();
+                        temp = next.trim();
+                        builder.append(delimiter);
+                        builder.append(next);
+                    }
                 }
             }
             result.add(String.valueOf(builder));
