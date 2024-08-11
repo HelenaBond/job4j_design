@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,9 +13,10 @@ import java.util.function.Predicate;
  */
 public class Search {
     public static void main(String[] args) throws IOException {
-        validArgs(args);
-        Path start = Paths.get(args[0].trim());
-        String extension = args[1].trim();
+        String[] stripArgs = Arrays.stream(args).map(String::strip).toArray(String[]::new);
+        validArgs(stripArgs);
+        Path start = Paths.get(stripArgs[0]);
+        String extension = stripArgs[1];
         search(start, path -> path.toFile().getName().endsWith(extension)).forEach(System.out::println);
     }
 
@@ -28,8 +30,8 @@ public class Search {
         if (args.length < 2) {
             throw new IllegalArgumentException("Insufficient arguments. Usage: ROOT_FOLDER EXTENSION.");
         }
-        String start = args[0].trim();
-        String extension = args[1].trim();
+        String start = args[0];
+        String extension = args[1];
         if (start.isEmpty() || extension.isEmpty()) {
             throw new IllegalArgumentException("Arguments can not be empty.");
         }

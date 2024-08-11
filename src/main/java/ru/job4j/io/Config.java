@@ -3,7 +3,6 @@ package ru.job4j.io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -23,13 +22,13 @@ public class Config {
         try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
             Map<String, String> properties = reader
                     .lines()
-                    .map(String::trim)
+                    .map(String::strip)
                     .filter(line -> !line.isBlank())
                     .filter(line -> !(line.charAt(0) == '#'))
                     .filter(this::valid)
                     .collect(Collectors.toMap(
-                            line -> line.substring(0, line.indexOf('=')).trim(),
-                            line -> line.substring(line.indexOf('=') + 1).trim(),
+                            line -> line.substring(0, line.indexOf('=')).stripTrailing(),
+                            line -> line.substring(line.indexOf('=') + 1).stripLeading(),
                             (existing, replacement) -> replacement));
             values.putAll(properties);
         } catch (IOException e) {

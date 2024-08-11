@@ -13,7 +13,7 @@ public class Analysis {
             String nextLine = reader.readLine();
             StringBuilder period = new StringBuilder();
             while (nextLine != null) {
-                String[] lineParts = nextLine.split(" ");
+                String[] lineParts = nextLine.split(" ", 2);
                 int status = Integer.parseInt(lineParts[0]);
                 if (!isError && status >= 400 && status <= 500) {
                     period.append(lineParts[1]);
