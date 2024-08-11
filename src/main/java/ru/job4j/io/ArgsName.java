@@ -17,10 +17,11 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String pair : args) {
-            pair = pair.trim();
+            pair = pair.strip();
             int delimiter = pair.indexOf("=");
             validArg(pair, delimiter);
-            values.put(pair.substring(1, delimiter).trim(), pair.substring(delimiter + 1).trim());
+            values.put(pair.substring(1, delimiter).stripTrailing(),
+                    pair.substring(delimiter + 1).stripLeading());
         }
     }
 
