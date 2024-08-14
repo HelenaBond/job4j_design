@@ -13,5 +13,19 @@ public class UsageLog4j {
         LOG.info("info message");
         LOG.warn("warn message");
         LOG.error("error message");
+
+        String name = "Petr Arsentev";
+        int age = 33;
+        LOG.debug("User info name : {}, age : {}", name, age);
+        boolean isMan = true;
+        float height = 1.5F;
+        LOG.debug("User is a man : {}, height much greater than : {}", isMan, height);
+        byte legs = 2;
+        short familiar = Short.MAX_VALUE;
+        LOG.debug("User have {} legs, and familiar greater than {} people", legs, familiar);
+        long symbols = 100_000_000_000L;
+        double miles = 100.0;
+        LOG.debug("User wrote more than {} symbols during the development of the course", symbols);
+        LOG.debug("User walked more than {} miles through the forest during the development of the course", miles);
     }
 }
