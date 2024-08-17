@@ -7,17 +7,41 @@ public class Destination {
     private String phone;
     private int zipCode;
     private double distance;
-    private boolean isPartner;
+    private boolean partner;
     private Address address;
     private String[] permissions;
 
-    public Destination(String phone, int zipCode, double distance, boolean isPartner, Address address, String[] permissions) {
+    public Destination(String phone, int zipCode, double distance, boolean partner, Address address, String[] permissions) {
         this.phone = phone;
         this.zipCode = zipCode;
         this.distance = distance;
-        this.isPartner = isPartner;
+        this.partner = partner;
         this.address = address;
         this.permissions = permissions;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public boolean isPartner() {
+        return partner;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public String[] getPermissions() {
+        return permissions;
     }
 
     @Override
@@ -26,7 +50,7 @@ public class Destination {
                 + "phone='" + phone + '\''
                 + ", zipCode=" + zipCode
                 + ", distance=" + distance
-                + ", isPartner=" + isPartner
+                + ", isPartner=" + partner
                 + ", address=" + address
                 + ", permissions=" + Arrays.toString(permissions)
                 + '}';
@@ -40,12 +64,12 @@ public class Destination {
         if (!(o instanceof Destination that)) {
             return false;
         }
-        return zipCode == that.zipCode && Double.compare(distance, that.distance) == 0 && isPartner == that.isPartner && Objects.equals(phone, that.phone) && Objects.equals(address, that.address) && Arrays.equals(permissions, that.permissions);
+        return zipCode == that.zipCode && Double.compare(distance, that.distance) == 0 && partner == that.partner && Objects.equals(phone, that.phone) && Objects.equals(address, that.address) && Arrays.equals(permissions, that.permissions);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(phone, zipCode, distance, isPartner, address);
+        int result = Objects.hash(phone, zipCode, distance, partner, address);
         result = 31 * result + Arrays.hashCode(permissions);
         return result;
     }
