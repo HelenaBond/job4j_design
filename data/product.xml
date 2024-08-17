@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!-- вагон стирального порошка -->
+<product isFood="false" barcode="0123456789" weightInKg="2000.0" name="washing powder">
+    <conditions isFreezing="false" dryEnvironment="false"/>
+    <ingredients>
+        <ingredient>anionic surfactants</ingredient>
+        <ingredient>nonionic surfactants</ingredient>
+    </ingredients>
+</product>
