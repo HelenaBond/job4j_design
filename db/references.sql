@@ -1,6 +1,6 @@
 CREATE TABLE person (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(64),
+    "name" VARCHAR(64),
     email VARCHAR(255) UNIQUE
 );
 CREATE TABLE passport (
@@ -19,7 +19,7 @@ CREATE TABLE address (
 );
 CREATE TABLE episode (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    "name" VARCHAR(255),
     episode_date DATE,
     address_id INTEGER REFERENCES address(id) -- many to one: несколько событий могут происходить по одному адресу
 );
