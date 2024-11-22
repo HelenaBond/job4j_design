@@ -13,9 +13,9 @@ public class UserGenerator implements Generate {
     private static final int NEW_USERS = 1000;
 
     private final List<User> users = new ArrayList<>();
-    public List<String> names;
-    public List<String> surnames;
-    public List<String> patrons;
+    private List<String> names;
+    private List<String> surnames;
+    private List<String> patrons;
     private Random random;
 
     public UserGenerator(Random random) throws IOException {
@@ -45,9 +45,5 @@ public class UserGenerator implements Generate {
 
     public User randomUser() {
         return users.get(random.nextInt(users.size()));
-    }
-
-    public List<User> getUsers() {
-        return users;
     }
 }
