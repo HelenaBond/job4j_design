@@ -18,7 +18,7 @@ public abstract class AbstractCache<K, V> {
         if (value == null) {
             result = load(key);
         } else {
-            result = value.get();
+            result = value.get() == null ? load(key) : value.get();
         }
         return result;
     }
