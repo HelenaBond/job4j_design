@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Fool {
 
-    private static String step(int startAt) {
+    protected static String step(int startAt) {
         return (startAt % 3 == 0 && startAt % 5 == 0)
                 ? "FizzBuzz"
                 : startAt % 3 == 0
