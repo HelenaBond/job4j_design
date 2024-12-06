@@ -1,6 +1,6 @@
-package ru.job4j.ood.srp.store;
+package ru.job4j.ood.reportsystem.store;
 
-import ru.job4j.ood.srp.model.Employee;
+import ru.job4j.ood.reportsystem.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp.model;
+package ru.job4j.ood.reportsystem.model;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -8,6 +8,9 @@ public class Employee {
     private Calendar hired;
     private Calendar fired;
     private double salary;
+
+    public Employee() {
+    }
 
     public Employee(String name, Calendar hired, Calendar fired, double salary) {
         this.name = name;

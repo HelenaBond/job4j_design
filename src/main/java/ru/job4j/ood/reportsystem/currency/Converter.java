@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp.currency;
+package ru.job4j.ood.reportsystem.currency;
 
 public class Converter {
     private final Currency source;

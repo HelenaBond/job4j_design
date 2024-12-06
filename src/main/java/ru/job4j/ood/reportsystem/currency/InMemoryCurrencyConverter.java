@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp.currency;
+package ru.job4j.ood.reportsystem.currency;
 
 public class InMemoryCurrencyConverter implements CurrencyConverter {
     private static final int CURRENCIES_COUNT = Currency.values().length;

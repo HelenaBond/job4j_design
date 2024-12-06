@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов.")
-class GeneratorImplTest {
+class ServiceImplTest {
 
     @Test
     public void whenProduceSuccessful() {
