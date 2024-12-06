@@ -1,4 +1,4 @@
-package ru.job4j.ood.ocp.core.two;
+package ru.job4j.ood.core.coreocp.two;
 
 public class NotificationService {
 

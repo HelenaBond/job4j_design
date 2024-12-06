@@ -1,4 +1,4 @@
-package ru.job4j.ood.ocp.core.three;
+package ru.job4j.ood.core.coreocp.three;
 
 import java.util.ArrayList;
 
