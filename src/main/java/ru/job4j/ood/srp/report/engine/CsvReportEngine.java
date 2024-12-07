@@ -1,20 +1,21 @@
-package ru.job4j.ood.srp.report;
+package ru.job4j.ood.srp.report.engine;
 
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
+import ru.job4j.ood.srp.report.Report;
 import ru.job4j.ood.srp.store.Store;
 
 import java.util.Calendar;
 import java.util.function.Predicate;
 
-public class ReportEngine implements Report {
+public class CsvReportEngine implements Report {
 
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
 
     private static final String SEPARATOR = System.lineSeparator();
 
-    public ReportEngine(Store store, DateTimeParser<Calendar> dateTimeParser) {
+    public CsvReportEngine(Store store, DateTimeParser<Calendar> dateTimeParser) {
         this.store = store;
         this.dateTimeParser = dateTimeParser;
     }

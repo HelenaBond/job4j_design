@@ -1,16 +1,17 @@
-package ru.job4j.ood.srp.report;
+package ru.job4j.ood.srp.report.engine;
 
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
+import ru.job4j.ood.srp.report.Report;
 import ru.job4j.ood.srp.store.MemoryStore;
 
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReportEngineTest {
+public class CsvReportEngineTest {
 
     @Test
     public void whenOneGenerated() {
@@ -19,7 +20,7 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         store.add(worker);
-        Report engine = new ReportEngine(store, parser);
+        Report engine = new CsvReportEngine(store, parser);
         StringBuilder expected = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
