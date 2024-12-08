@@ -1,4 +1,4 @@
-package ru.job4j.ood.core.coresrp;
+package ru.job4j.ood.core.srp;
 
 import java.util.ArrayList;
 import java.util.List;

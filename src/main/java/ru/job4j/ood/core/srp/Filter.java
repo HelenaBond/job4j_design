@@ -1,4 +1,4 @@
-package ru.job4j.ood.core.coresrp;
+package ru.job4j.ood.core.srp;
 
 public interface Filter<T> {
     void filter(String name);

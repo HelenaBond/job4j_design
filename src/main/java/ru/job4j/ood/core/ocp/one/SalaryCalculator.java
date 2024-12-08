@@ -1,4 +1,4 @@
-package ru.job4j.ood.core.coreocp.one;
+package ru.job4j.ood.core.ocp.one;
 
 public class SalaryCalculator {
     public double calculateSalary(Employee employee) {
