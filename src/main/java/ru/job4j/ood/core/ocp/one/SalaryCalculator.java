@@ -12,6 +12,8 @@ public class SalaryCalculator {
 
         if (employee.getDepartment().equals("IT")) {
             salary += 1000;
+        } else if (employee.getDepartment().equals("Hr")) {
+            salary += 100;
         }
 
         return salary;
