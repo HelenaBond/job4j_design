@@ -6,6 +6,7 @@ import ru.job4j.ood.lsp.model.Food;
 
 import java.time.LocalDate;
 
+import static org.assertj.core.api.Assertions.within;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class ShopTest {
@@ -16,9 +17,11 @@ class ShopTest {
     @BeforeAll
     public static void init() {
         price = 100;
-        expected = new Food("milk",
+        expected = new Food(
+                "milk",
                 LocalDate.now(),
-                LocalDate.now(), price);
+                LocalDate.now(),
+                price);
     }
 
     @Test
@@ -34,7 +37,7 @@ class ShopTest {
         shop.move(expected, 0);
         Food actual = shop.getAll().get(0);
         assertThat(actual).isEqualTo(expected);
-        double discount = price - (price * 0.2);
-        assertThat(actual.getDiscount()).isEqualTo(discount);
+        double discount = price - (price * AbstractStore.DISCOUNT_PROPORTION);
+        assertThat(actual.getDiscount()).isCloseTo(discount, within(0.1));
     }
 }

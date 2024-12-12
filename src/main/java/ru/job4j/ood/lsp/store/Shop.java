@@ -6,10 +6,11 @@ public class Shop extends AbstractStore {
 
     @Override
     public void move(Food product, double percentFresh) {
-        if (percentFresh == 0 || percentFresh > 25 && percentFresh < 100) {
+        if (percentFresh == ONE_DAY_FRESH
+                || percentFresh > WAREHOUSE_MAX_PERCENT && percentFresh < TRASH_MIN_PERCENT) {
             add(product);
-            if (percentFresh == 0 || percentFresh > 75) {
-                product.setDiscount(product.getPrice() - product.getPrice() * 0.2);
+            if (percentFresh == ONE_DAY_FRESH || percentFresh > DISCOUNT_MIN_PERCENT) {
+                product.setDiscount(product.getPrice() - product.getPrice() * DISCOUNT_PROPORTION);
             }
         }
     }

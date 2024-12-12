@@ -10,24 +10,28 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class TrashTest {
 
-    public static Food product;
+    public static Food expected;
 
     @BeforeAll
     public static void init() {
-        product = new Food("milk", LocalDate.now(), LocalDate.now(), 100);
+        expected = new Food(
+                "milk",
+                LocalDate.now(),
+                LocalDate.now(),
+                100);
     }
 
     @Test
     public void whenMove100PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(product, 100);
-        assertThat(trash.getAll().get(0)).isEqualTo(product);
+        trash.move(expected, 100);
+        assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 
     @Test
     public void whenMove110PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(product, 110);
-        assertThat(trash.getAll().get(0)).isEqualTo(product);
+        trash.move(expected, 110);
+        assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 }

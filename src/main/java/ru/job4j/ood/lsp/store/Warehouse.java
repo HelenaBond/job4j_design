@@ -6,7 +6,7 @@ public class Warehouse extends AbstractStore {
 
     @Override
     public void move(Food product, double percentFresh) {
-        if (percentFresh > 0 && percentFresh <= 25) {
+        if (percentFresh > ONE_DAY_FRESH && percentFresh <= WAREHOUSE_MAX_PERCENT) {
             add(product);
         }
     }
