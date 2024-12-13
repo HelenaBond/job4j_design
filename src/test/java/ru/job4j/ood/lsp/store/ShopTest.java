@@ -32,9 +32,9 @@ class ShopTest {
     }
 
     @Test
-    public void whenMove100PercentThenSuccessfullyWithDiscount() {
+    public void whenMove99Dot9PercentThenSuccessfullyWithDiscount() {
         Store shop = new Shop();
-        shop.move(expected, 0);
+        shop.move(expected, 99.9);
         Food actual = shop.getAll().get(0);
         assertThat(actual).isEqualTo(expected);
         double discount = price - (price * AbstractStore.DISCOUNT_PROPORTION);

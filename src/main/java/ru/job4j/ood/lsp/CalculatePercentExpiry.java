@@ -13,6 +13,6 @@ public class CalculatePercentExpiry implements Calculate {
         LocalDate end = product.getExpiryDate();
         double totalDays = ChronoUnit.DAYS.between(start, end.plusDays(1));
         double passedDays = ChronoUnit.DAYS.between(start, now);
-        return (passedDays / totalDays) * 100;
+        return start.isEqual(end) ? 99 : (passedDays / totalDays) * 100;
     }
 }
