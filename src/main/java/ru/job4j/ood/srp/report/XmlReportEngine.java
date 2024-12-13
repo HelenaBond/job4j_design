@@ -1,4 +1,4 @@
-package ru.job4j.ood.srp.report.engine;
+package ru.job4j.ood.srp.report;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -8,7 +8,6 @@ import ru.job4j.ood.srp.formatter.CalendarAdapterXml;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.model.EmployeeWrapper;
-import ru.job4j.ood.srp.report.Report;
 import ru.job4j.ood.srp.store.Store;
 
 import java.io.StringWriter;
@@ -16,17 +15,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class XmlReportEngine implements Report {
-
-    private final Store store;
+public class XmlReportEngine extends AbstractReport {
 
     public XmlReportEngine(Store store) {
-        this.store = store;
+        super(store);
     }
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        List<Employee> employees = store.findBy(filter);
+        List<Employee> employees = this.getStore().findBy(filter);
         XmlAdapter<String, Calendar> parser = new CalendarAdapterXml(new ReportDateTimeParser());
 
         try {
