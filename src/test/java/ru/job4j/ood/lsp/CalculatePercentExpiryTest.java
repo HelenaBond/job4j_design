@@ -25,7 +25,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 12),
                 LocalDate.of(2024, 12, 12),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(99.0, within(0.1));
     }
 
@@ -36,7 +36,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 11),
                 LocalDate.of(2024, 12, 12),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(50.0, within(0.1));
     }
 
@@ -47,7 +47,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 9),
                 LocalDate.of(2024, 12, 14),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(50.0, within(0.1));
     }
 
@@ -58,7 +58,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 10),
                 LocalDate.of(2024, 12, 11),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(100.0, within(0.1));
     }
 
@@ -69,7 +69,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 9),
                 LocalDate.of(2024, 12, 10),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(150.0, within(0.1));
     }
 
@@ -80,7 +80,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 11),
                 LocalDate.of(2024, 12, 14),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(25.0, within(0.1));
     }
 
@@ -91,7 +91,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 6),
                 LocalDate.of(2024, 12, 13),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(75.0, within(0.1));
     }
 
@@ -102,7 +102,7 @@ class CalculatePercentExpiryTest {
                 LocalDate.of(2024, 12, 12),
                 LocalDate.of(2024, 12, 13),
                 100);
-        Calculate calculate = new CalculatePercentExpiry();
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(0.0, within(0.1));
     }
 }

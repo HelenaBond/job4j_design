@@ -5,9 +5,8 @@ import ru.job4j.ood.lsp.model.Food;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class CalculatePercentExpiry implements Calculate {
+public class CalculatePercentExpiry {
 
-    @Override
     public double percentFresh(Food product, LocalDate now) {
         LocalDate start = product.getCreateDate();
         LocalDate end = product.getExpiryDate();

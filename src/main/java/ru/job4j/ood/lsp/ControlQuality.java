@@ -9,14 +9,12 @@ import java.util.List;
 public class ControlQuality {
 
     private final List<Store> stores;
-    private final Calculate calculate;
 
-    public ControlQuality(List<Store> stores, Calculate calculate) {
+    public ControlQuality(List<Store> stores) {
         this.stores = stores;
-        this.calculate = calculate;
     }
 
-    public void moveTo(Food product, LocalDate now) {
+    public void moveTo(Food product, LocalDate now, CalculatePercentExpiry calculate) {
         double percentFresh = calculate.percentFresh(product, now);
         for (Store store : stores) {
             store.move(product, percentFresh);

@@ -28,13 +28,13 @@ class ControlQualityTest {
 
     @Test
     public void whenOneDayFreshThenDiscountInShop() {
-        ControlQuality controlQuality = new ControlQuality(stores, new CalculatePercentExpiry());
+        ControlQuality controlQuality = new ControlQuality(stores);
         Food expected = new Food(
                 "milk",
                 LocalDate.of(2024, 12, 12),
                 LocalDate.of(2024, 12, 12),
                 100);
-        controlQuality.moveTo(expected, now);
+        controlQuality.moveTo(expected, now, new CalculatePercentExpiry());
         Food actual = stores.get(2).getAll().get(0);
         double expectedDiscount = actual.getPrice() - actual.getPrice() * 0.2;
         assertThat(actual).isEqualTo(expected);
@@ -43,13 +43,13 @@ class ControlQualityTest {
 
     @Test
     public void whenFirstDayFreshThenInWarehouse() {
-        ControlQuality controlQuality = new ControlQuality(stores, new CalculatePercentExpiry());
+        ControlQuality controlQuality = new ControlQuality(stores);
         Food expected = new Food(
                 "milk",
                 LocalDate.of(2024, 12, 12),
                 LocalDate.of(2024, 12, 13),
                 100);
-        controlQuality.moveTo(expected, now);
+        controlQuality.moveTo(expected, now, new CalculatePercentExpiry());
         Food actual = stores.get(1).getAll().get(0);
         assertThat(actual).isEqualTo(expected);
     }
