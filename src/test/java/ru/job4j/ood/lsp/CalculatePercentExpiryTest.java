@@ -2,7 +2,8 @@ package ru.job4j.ood.lsp;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
+import ru.job4j.ood.lsp.products.CalculatePercentExpiry;
 
 import java.time.LocalDate;
 

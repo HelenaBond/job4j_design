@@ -2,7 +2,9 @@ package ru.job4j.ood.lsp.store;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
+import ru.job4j.ood.lsp.products.store.Store;
+import ru.job4j.ood.lsp.products.store.Trash;
 
 import java.time.LocalDate;
 

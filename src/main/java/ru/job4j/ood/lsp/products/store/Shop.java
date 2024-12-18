@@ -1,6 +1,6 @@
-package ru.job4j.ood.lsp.store;
+package ru.job4j.ood.lsp.products.store;
 
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
 
 public class Shop extends AbstractStore {
 

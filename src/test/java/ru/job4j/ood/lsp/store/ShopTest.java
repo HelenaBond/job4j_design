@@ -2,7 +2,9 @@ package ru.job4j.ood.lsp.store;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
+import ru.job4j.ood.lsp.products.store.Shop;
+import ru.job4j.ood.lsp.products.store.Store;
 
 import java.time.LocalDate;
 
@@ -37,7 +39,7 @@ class ShopTest {
         shop.move(expected, 99.9);
         Food actual = shop.getAll().get(0);
         assertThat(actual).isEqualTo(expected);
-        double discount = price - (price * AbstractStore.DISCOUNT_PROPORTION);
+        double discount = price - (price * 0.2);
         assertThat(actual.getDiscount()).isCloseTo(discount, within(0.1));
     }
 }
