@@ -13,9 +13,13 @@ public class Distribution {
     }
 
     public Ticket parked(Parking parking) {
-        return null;
+        return parking.parked(park);
     }
 
     public void vacated(Ticket ticket) {
+        Boolean[] places = park.places().get(ticket.transport());
+        for (int i = ticket.position() - 1; i < ticket.transport().getSize(); i++) {
+            places[i] = false;
+        }
     }
 }

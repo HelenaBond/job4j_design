@@ -1,26 +1,26 @@
 package ru.job4j.ood.lsp.cars.parking;
 
 import ru.job4j.ood.lsp.cars.model.park.Park;
+import ru.job4j.ood.lsp.cars.model.park.Ticket;
+import ru.job4j.ood.lsp.cars.model.transport.Car;
 import ru.job4j.ood.lsp.cars.model.transport.Truck;
 
-public class ParkingTruck implements Parking {
-
-    private Truck truck;
-
-    public ParkingTruck(Truck truck) {
-        this.truck = truck;
-    }
-
-    public Truck getTruck() {
-        return truck;
-    }
-
-    public void setTruck(Truck truck) {
-        this.truck = truck;
-    }
+public record ParkingTruck(Truck truck, Car car) implements Parking {
 
     @Override
-    public boolean parking(Park park) {
-        return false;
+    public Ticket parked(Park park) {
+        Boolean[] places = park.places().get(truck);
+        int index = getIndex(places, truck);
+        if (index == -1) {
+            places = park.places().get(car);
+            index = getIndex(places, truck);
+        }
+        if (index != -1) {
+            for (int i = index; i < truck.getSize(); i++) {
+                places[i] = true;
+            }
+            return new Ticket(car, index + 1);
+        }
+        return null;
     }
 }

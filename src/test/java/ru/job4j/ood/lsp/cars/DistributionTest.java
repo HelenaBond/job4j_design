@@ -2,12 +2,10 @@ package ru.job4j.ood.lsp.cars;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.lsp.cars.model.park.Park;
 import ru.job4j.ood.lsp.cars.model.park.Ticket;
 import ru.job4j.ood.lsp.cars.model.transport.Car;
-import ru.job4j.ood.lsp.cars.model.transport.Transport;
 import ru.job4j.ood.lsp.cars.model.transport.Truck;
 import ru.job4j.ood.lsp.cars.parking.Parking;
 import ru.job4j.ood.lsp.cars.parking.ParkingCar;
@@ -17,31 +15,30 @@ import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@Disabled("Тесты не активны пока не будет создана реализация.")
 class DistributionTest {
 
-    private static Transport car;
-    private static Transport truck;
+    private static Car car;
+    private static Truck truck;
     private Park park;
 
     @BeforeAll
     public static void init() {
-        car = new Car(1);
+        car = new Car();
         truck = new Truck(2);
     }
 
     @BeforeEach
     public void initPark() {
-        Map<Transport, Boolean[]> places = Map.of(
-                car, new Boolean[4],
-                truck, new Boolean[4]
+        Map<Car, Boolean[]> places = Map.of(
+                car, new Boolean[] {false, false, false, false},
+                truck, new Boolean[] {false, false, false, false}
         );
         park = new Park(places);
     }
 
     @Test
     public void whenCarIsParkedIntoRightPlace() {
-        Parking currentCar = new ParkingCar(new Car(1));
+        Parking currentCar = new ParkingCar(car);
         Distribution distribution = new Distribution(park);
         Ticket actualParking = distribution.parked(currentCar);
         assertThat(actualParking.position()).isEqualTo(1);
@@ -52,7 +49,7 @@ class DistributionTest {
 
     @Test
     public void whenTruckIsParkedIntoTruckPlace() {
-        Parking currentTruck = new ParkingTruck(new Truck(2));
+        Parking currentTruck = new ParkingTruck(new Truck(2), car);
         Distribution distribution = new Distribution(park);
         Ticket actualParking = distribution.parked(currentTruck);
         assertThat(actualParking.position()).isEqualTo(1);
@@ -64,7 +61,7 @@ class DistributionTest {
 
     @Test
     public void whenVeryBigTruckIsParkedIntoCarPlace() {
-        Parking currentTruck = new ParkingTruck(new Truck(3));
+        Parking currentTruck = new ParkingTruck(new Truck(3), car);
         Distribution distribution = new Distribution(park);
         Ticket actualParking = distribution.parked(currentTruck);
         assertThat(actualParking.position()).isEqualTo(1);
@@ -77,7 +74,7 @@ class DistributionTest {
 
     @Test
     public void whenVacatedSuccessful() {
-        Parking currentCar = new ParkingCar(new Car(1));
+        Parking currentCar = new ParkingCar(car);
         Distribution distribution = new Distribution(park);
         Ticket actualParking = distribution.parked(currentCar);
         distribution.vacated(actualParking);
@@ -87,8 +84,8 @@ class DistributionTest {
 
     @Test
     public void whenVeryBigTruckIsNotParkedIntoCarPlace() {
-        Parking currentCar = new ParkingCar(new Car(1));
-        Parking currentTruck = new ParkingTruck(new Truck(3));
+        Parking currentCar = new ParkingCar(car);
+        Parking currentTruck = new ParkingTruck(new Truck(3), car);
         Distribution distribution = new Distribution(park);
         Ticket parkingCar1 = distribution.parked(currentCar);
         Ticket parkingCar2 = distribution.parked(currentCar);
