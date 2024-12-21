@@ -1,18 +1,19 @@
 package ru.job4j.ood.lsp.cars.parking;
-import ru.job4j.ood.lsp.cars.model.park.Park;
-import ru.job4j.ood.lsp.cars.model.park.Ticket;
-import ru.job4j.ood.lsp.cars.model.transport.Car;
+import ru.job4j.ood.lsp.cars.model.Ticket;
 
-public record ParkingCar(Car car) implements Parking {
+import java.util.Map;
+import java.util.Optional;
+
+public class ParkingCar implements Parking {
 
     @Override
-    public Ticket parked(Park park) {
-        Boolean[] places = park.places().get(car);
-        int index = getIndex(places, car);
+    public Optional<Ticket> parked(Map<Integer, Boolean[]> park) {
+        Boolean[] places = park.get(MIN_LENGTH);
+        int index = getIndex(places, MIN_LENGTH);
         if (index > -1) {
             places[index] = true;
-            return new Ticket(car, index + 1);
+            return Optional.of(new Ticket(MIN_LENGTH, index + 1));
         }
-        return null;
+        return Optional.empty();
     }
 }

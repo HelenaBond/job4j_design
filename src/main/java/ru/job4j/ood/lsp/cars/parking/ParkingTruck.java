@@ -1,26 +1,35 @@
 package ru.job4j.ood.lsp.cars.parking;
 
-import ru.job4j.ood.lsp.cars.model.park.Park;
-import ru.job4j.ood.lsp.cars.model.park.Ticket;
-import ru.job4j.ood.lsp.cars.model.transport.Car;
-import ru.job4j.ood.lsp.cars.model.transport.Truck;
+import ru.job4j.ood.lsp.cars.model.Ticket;
 
-public record ParkingTruck(Truck truck, Car car) implements Parking {
+import java.util.Map;
+import java.util.Optional;
+
+public class ParkingTruck implements Parking {
+
+    private final int parkingSpaceLength;
+
+    public ParkingTruck(int parkingSpaceLength) {
+        this.parkingSpaceLength = parkingSpaceLength;
+    }
 
     @Override
-    public Ticket parked(Park park) {
-        Boolean[] places = park.places().get(truck);
-        int index = getIndex(places, truck);
+    public Optional<Ticket> parked(Map<Integer, Boolean[]> park) {
+        Boolean[] places = park.get(parkingSpaceLength);
+        int transportType = parkingSpaceLength;
+        int index = getIndex(places, parkingSpaceLength);
         if (index == -1) {
-            places = park.places().get(car);
-            index = getIndex(places, truck);
+            transportType = MIN_LENGTH;
+            places = park.get(transportType);
+            index = getIndex(places, parkingSpaceLength);
+
         }
         if (index != -1) {
-            for (int i = index; i < truck.getSize(); i++) {
+            for (int i = index; i < parkingSpaceLength; i++) {
                 places[i] = true;
             }
-            return new Ticket(car, index + 1);
+            return Optional.of(new Ticket(transportType, index + 1));
         }
-        return null;
+        return Optional.empty();
     }
 }
