@@ -24,14 +24,14 @@ class TrashTest {
     @Test
     public void whenMove100PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(expected, 100);
+        trash.add(expected, 100);
         assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 
     @Test
     public void whenMove110PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(expected, 110);
+        trash.add(expected, 110);
         assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 }
