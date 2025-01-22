@@ -3,10 +3,11 @@ package ru.job4j.ood.lsp.products.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Food {
+public class Food implements Comparable<Food> {
     private String name;
     private LocalDate createDate;
     private LocalDate expiryDate;
+    private LocalDate moveDate;
     private double price;
     private double discount;
 
@@ -60,6 +61,14 @@ public class Food {
         this.discount = discount;
     }
 
+    public LocalDate getMoveDate() {
+        return moveDate;
+    }
+
+    public void setMoveDate(LocalDate moveDate) {
+        this.moveDate = moveDate;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -77,5 +86,11 @@ public class Food {
     @Override
     public int hashCode() {
         return Objects.hash(name, expiryDate, createDate, price);
+    }
+
+    @Override
+    public int compareTo(Food o) {
+        int result = this.moveDate.compareTo(o.moveDate);
+        return result == 0 ? this.expiryDate.compareTo(o.expiryDate) : result;
     }
 }
