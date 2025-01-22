@@ -1,4 +1,4 @@
-package ru.job4j.ood.lsp.model;
+package ru.job4j.ood.lsp.products.model;
 
 import java.time.LocalDate;
 import java.util.Objects;

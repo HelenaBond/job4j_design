@@ -1,10 +1,10 @@
-package ru.job4j.ood.lsp.store;
+package ru.job4j.ood.lsp.products.store;
 
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
 
 import java.util.Optional;
 
-public class Shop extends AbstractStore {
+public class Warehouse extends AbstractStore {
 
     @Override
     public void add(Food product, double percentFresh) {
@@ -22,6 +22,6 @@ public class Shop extends AbstractStore {
     }
 
     private boolean check(double percentFresh) {
-        return percentFresh > WAREHOUSE_MAX_PERCENT && percentFresh < TRASH_MIN_PERCENT;
+        return percentFresh >= FIRST_DAY_FRESH && percentFresh <= WAREHOUSE_MAX_PERCENT;
     }
 }
