@@ -2,7 +2,9 @@ package ru.job4j.ood.lsp.store;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
+import ru.job4j.ood.lsp.products.store.Store;
+import ru.job4j.ood.lsp.products.store.Trash;
 
 import java.time.LocalDate;
 
@@ -24,14 +26,14 @@ class TrashTest {
     @Test
     public void whenMove100PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(expected, 100);
+        trash.add(expected, 100);
         assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 
     @Test
     public void whenMove110PercentThenSuccessfully() {
         Store trash = new Trash();
-        trash.move(expected, 110);
+        trash.add(expected, 110);
         assertThat(trash.getAll().get(0)).isEqualTo(expected);
     }
 }

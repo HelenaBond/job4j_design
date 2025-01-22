@@ -2,7 +2,9 @@ package ru.job4j.ood.lsp.store;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.job4j.ood.lsp.model.Food;
+import ru.job4j.ood.lsp.products.model.Food;
+import ru.job4j.ood.lsp.products.store.Store;
+import ru.job4j.ood.lsp.products.store.Warehouse;
 
 import java.time.LocalDate;
 
@@ -24,14 +26,14 @@ class WarehouseTest {
     @Test
     public void whenMove0Dot1PercentThenSuccessfully() {
         Store warehouse = new Warehouse();
-        warehouse.move(expected, 0.1);
+        warehouse.add(expected, 0.1);
         assertThat(warehouse.getAll().get(0)).isEqualTo(expected);
     }
 
     @Test
     public void whenMove25PercentThenSuccessfully() {
         Store warehouse = new Warehouse();
-        warehouse.move(expected, 25);
+        warehouse.add(expected, 25);
         assertThat(warehouse.getAll().get(0)).isEqualTo(expected);
     }
 }
