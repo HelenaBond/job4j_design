@@ -19,7 +19,7 @@ class CalculatePercentExpiryTest {
     }
 
     @Test
-    public void  when12And12Then0Percent() {
+    public void  when12And12Then99dot0Percent() {
         Food product = new Food(
                 "milk",
                 LocalDate.of(2024, 12, 12),
@@ -104,5 +104,32 @@ class CalculatePercentExpiryTest {
                 100);
         CalculatePercentExpiry calculate = new CalculatePercentExpiry();
         assertThat(calculate.percentFresh(product, now)).isCloseTo(0.0, within(0.1));
+    }
+
+    @Test
+    public void whenSetSaleSuccessful() {
+        int price = 100;
+        Food product = new Food(
+                "milk",
+                LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 12),
+                price);
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
+        calculate.setSale(product, 99.0);
+        double discount = price - (price * 0.2);
+        assertThat(product.getDiscount()).isCloseTo(discount, within(0.1));
+    }
+
+    @Test
+    public void whenNotSetSaleThenDiscountIsPrice() {
+        int price = 100;
+        Food product = new Food(
+                "milk",
+                LocalDate.of(2024, 12, 11),
+                LocalDate.of(2024, 12, 12),
+                price);
+        CalculatePercentExpiry calculate = new CalculatePercentExpiry();
+        calculate.setSale(product, 50);
+        assertThat(product.getDiscount()).isCloseTo(price, within(0.1));
     }
 }

@@ -24,14 +24,14 @@ class WarehouseTest {
     @Test
     public void whenMove0Dot1PercentThenSuccessfully() {
         Store warehouse = new Warehouse();
-        warehouse.move(expected, 0.1);
+        warehouse.add(expected, 0.1);
         assertThat(warehouse.getAll().get(0)).isEqualTo(expected);
     }
 
     @Test
     public void whenMove25PercentThenSuccessfully() {
         Store warehouse = new Warehouse();
-        warehouse.move(expected, 25);
+        warehouse.add(expected, 25);
         assertThat(warehouse.getAll().get(0)).isEqualTo(expected);
     }
 }
