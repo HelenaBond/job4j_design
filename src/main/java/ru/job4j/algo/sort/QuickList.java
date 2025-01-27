@@ -5,6 +5,13 @@ import java.util.List;
 
 public class QuickList {
 
+    /**
+     * Память O(n) в худшем случае.
+     * Сложность выполнения: в худшем случае O(n*n)
+     * @param sequence
+     * @param comparator
+     * @param <T>
+     */
     public static <T> void quickSort(List<T> sequence, Comparator<T> comparator) {
         quickSort(sequence, 0, sequence.size() - 1, comparator);
     }
