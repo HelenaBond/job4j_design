@@ -1,6 +1,13 @@
 package ru.job4j.algo;
 
 public class GasStation {
+    /**
+     * Сложность O(n)
+     * Доп. память O(1)
+     * @param gas
+     * @param cost
+     * @return
+     */
     public int canCompleteCircuit(int[] gas, int[] cost) {
         int totalGus = 0;
         int totalCost = 0;
