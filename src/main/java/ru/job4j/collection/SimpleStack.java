@@ -17,4 +17,8 @@ public class SimpleStack<T> {
     public Iterator<T> iterator() {
         return linked.iterator();
     }
+
+    public boolean isEmpty() {
+        return linked.isEmpty();
+    }
 }
