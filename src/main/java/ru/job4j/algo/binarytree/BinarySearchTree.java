@@ -46,6 +46,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node find(Node node, T key) {
         Node result = null;
+        if (node.key == null) {
+            return null;
+        }
         if (node.key.compareTo(key) > 0) {
             if (node.left != null) {
                 result = find(node.left, key);
@@ -212,6 +215,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return node;
         }
         return maximum(node.right);
+    }
+
+    public void clear() {
+        Node node = root;
+        clear(node);
+    }
+
+    private void clear(Node first) {
+        if (first != null) {
+            clear(first.left);
+            clear(first.right);
+            first.key = null;
+            first.left = null;
+            first.right = null;
+        }
     }
 
     @Override

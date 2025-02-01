@@ -181,4 +181,18 @@ class BinarySearchTreeTest {
         assertThat(tree.contains(3)).isTrue();
         assertThat(tree.contains(7)).isTrue();
     }
+    @Test
+    void whenClearTreeThenTreeIsEmpty() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.clear();
+        assertThat(tree.contains(4)).isFalse();
+    }
+
 }
