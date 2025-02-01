@@ -61,10 +61,93 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public boolean remove(T key) {
+        if (Objects.isNull(key) || Objects.isNull(root)) {
+            return false;
+        }
+        return remove(root, key, null);
+    }
+
+    private boolean remove(Node current, T key, Node parent) {
+        if (current == null) {
+            return false;
+        }
+        int cmp = key.compareTo(current.key);
+        if (cmp < 0) {
+            return remove(current.left, key, current);
+        } else if (cmp > 0) {
+            return remove(current.right, key, current);
+        }
         /**
-         *  Метод будет реализован в следующих уроках
+         * Найден узел для удаления
          */
-        return false;
+        if (current.left == null && current.right == null) {
+            swap(parent, current, null);
+        } else if (current.left == null) {
+            swap(parent, current, current.right);
+        } else if (current.right == null) {
+            swap(parent, current, current.left);
+        } else {
+            Node heir = getHeir(current);
+            swap(parent, current, heir);
+            /**
+             * Подключаем левое поддерево
+             */
+            heir.left = current.left;
+        }
+
+        /**
+         * Очищаем ссылки на потомков
+         */
+        current.key = null;
+        current.left = null;
+        current.right = null;
+
+        return true;
+    }
+
+    private void swap(Node parent, Node current, Node replacement) {
+        if (parent == null) {
+            root = replacement;
+        } else if (parent.left == current) {
+            parent.left = replacement;
+        } else {
+            parent.right = replacement;
+        }
+    }
+
+    private Node getHeir(Node delNode) {
+        /**
+         * сылки на удаляемый узел и его правое поддерево
+         */
+        Node nodeParent = delNode;
+        Node node = delNode;
+        /**
+         * самый левосторонний потомок в правом поддереве
+         */
+        Node current = delNode.right;
+        while (current != null) {
+            nodeParent = node;
+            node = current;
+            current = current.left;
+        }
+        /**
+         * если найденный узел не является непосредственным правым потомком удаляемого узла,
+         * то открепляем его от его родителя и соединяем с правым поддеревом
+         */
+        if (node != delNode.right) {
+            /**
+             * Обновляем ссылку родителя на правого потомка
+             */
+            nodeParent.left = node.right;
+            /**
+             * Переносим правое поддерево удаляемого узла на место найденного узла
+             */
+            node.right = delNode.right;
+        }
+        /**
+         * Возвращаем самого левого потомка правого поддерева
+         */
+        return node;
     }
 
     public List<T> inSymmetricalOrder() {

@@ -97,4 +97,88 @@ class BinarySearchTreeTest {
         assertThat(tree.inPostOrder()).hasSize(7)
                 .containsExactly(1, 3, 2, 5, 7, 6, 4);
     }
+
+    @Test
+    void whenRemoveElementThenTreeUpdated() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.remove(3);
+        assertThat(tree.contains(3)).isFalse();
+        assertThat(tree.contains(4)).isTrue();
+        assertThat(tree.contains(6)).isTrue();
+        assertThat(tree.contains(1)).isTrue();
+    }
+
+    @Test
+    void whenRemoveRootThenTreeUpdated() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.remove(4);
+        assertThat(tree.contains(4)).isFalse();
+        assertThat(tree.contains(2)).isTrue();
+        assertThat(tree.contains(6)).isTrue();
+        assertThat(tree.contains(5)).isTrue();
+    }
+
+    @Test
+    void whenRemoveLeafThenTreeUpdated() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.remove(1);
+        assertThat(tree.contains(1)).isFalse();
+        assertThat(tree.contains(4)).isTrue();
+        assertThat(tree.contains(2)).isTrue();
+        assertThat(tree.contains(7)).isTrue();
+    }
+
+    @Test
+    void whenRemoveNonExistingElementThenNothingChanges() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.remove(8);
+        assertThat(tree.contains(4)).isTrue();
+        assertThat(tree.contains(2)).isTrue();
+        assertThat(tree.contains(6)).isTrue();
+    }
+
+    @Test
+    void whenRemoveNodeWithOneChildThenTreeUpdated() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.put(4);
+        tree.put(2);
+        tree.put(6);
+        tree.put(3);
+        tree.put(5);
+        tree.put(7);
+        tree.put(1);
+        tree.remove(2);
+        assertThat(tree.contains(2)).isFalse();
+        assertThat(tree.contains(4)).isTrue();
+        assertThat(tree.contains(3)).isTrue();
+        assertThat(tree.contains(7)).isTrue();
+    }
 }
