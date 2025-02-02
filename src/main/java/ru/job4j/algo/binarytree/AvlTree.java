@@ -6,6 +6,7 @@ import ru.job4j.algo.tree.visual.VisualNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class AvlTree<T extends Comparable<T>> {
 
@@ -14,19 +15,27 @@ public class AvlTree<T extends Comparable<T>> {
     public boolean contains(T value) {
         return contains(root, value);
     }
+
     private boolean contains(Node node, T value) {
-        if (node == null) {
-            return false;
-        }
-        if (node.key == value) {
-            return true;
-        }
-        return value.compareTo(node.key) < 0
-                ? contains(node.left, value)
-                : contains(node.right, value);
+        return get(node, value) != null;
     }
 
+    public Optional<T> get(T value) {
+        T result = get(root, value);
+        return result == null ? Optional.empty() : Optional.of(result);
+    }
 
+    private T get(Node node, T value) {
+        if (node == null) {
+            return null;
+        }
+        if (node.key.equals(value)) {
+            return node.key;
+        }
+        return value.compareTo(node.key) < 0
+                ? get(node.left, value)
+                : get(node.right, value);
+    }
 
     public boolean insert(T value) {
         boolean result = false;
