@@ -1,9 +1,15 @@
-package ru.job4j.algo;
+package ru.job4j.algo.hash;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class LongestUniqueSubstring {
+    /**
+     * разработать алгоритм нахождение наименьшего диапазона
+     * с данным количеством различных элементов
+     * @param str
+     * @return
+     */
     public static String longestUniqueSubstring(String str) {
         if (str == null || str.isEmpty()) {
             return "";

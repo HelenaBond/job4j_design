@@ -1,9 +1,16 @@
-package ru.job4j.algo;
+package ru.job4j.algo.twopointers;
 
 import java.util.*;
 
 public class SmallestRangeFinder {
 
+    /**
+     * Метод должен принимать массив nums и целочисленное значение k,
+     * и возвращать массив из двух целых чисел, представляющих наименьший диапазон
+     * @param nums
+     * @param k
+     * @return
+     */
     public static int[] findSmallestRange(int[] nums, int k) {
         int left = 0;
         for (int i = 1; i < nums.length; i++) {
