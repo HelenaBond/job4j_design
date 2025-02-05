@@ -1,4 +1,4 @@
-package ru.job4j.algo;
+package ru.job4j.algo.slidingwindow;
 
 import java.util.ArrayList;
 import java.util.Comparator;
