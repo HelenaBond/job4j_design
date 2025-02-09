@@ -1,4 +1,4 @@
-package ru.job4j.algo;
+package ru.job4j.algo.greedy;
 
 public class GasStation {
     /**
